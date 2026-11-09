@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>nickeduuu</title>
+<meta name="description" content="Os melhores (e piores) momentos das minhas partidas. YouTube, TikTok e Instagram do nickeduuu.">
+<meta property="og:title" content="nickeduuu">
+<meta property="og:description" content="Os melhores (e piores) momentos das minhas partidas. YouTube, TikTok e Instagram.">
+<meta property="og:url" content="https://nickeduu.github.io/">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#101318">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23e9edf2'/%3E%3Ctext x='32' y='46' font-family='Arial' font-weight='700' font-size='40' text-anchor='middle' fill='%23101318'%3En%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400&display=swap">
+<style>
+/* Layout: one narrow "player card" column, links styled as a pause-menu list keyed to controller face buttons */
+:root {
+  --bg: #101318;
+  --panel: #171c23;
+  --line: #262d37;
+  --fg: #e9edf2;
+  --muted: #8a94a3;
+  --btn-a: #4cc76a;
+  --btn-b: #e5484d;
+  --btn-x: #3d8bfd;
+  --btn-y: #f2c230;
+  --display: "Chakra Petch", "Bahnschrift", "Arial Narrow", sans-serif;
+  --body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", Consolas, ui-monospace, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { min-height: 100%; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.5;
+  padding-block: 40px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+}
+.wrap { max-width: 440px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px 22px 20px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  align-items: center;
+}
+.mono-badge {
+  width: 64px; height: 64px; border-radius: 12px;
+  display: grid; place-items: center;
+  font-family: var(--display); font-weight: 700; font-size: 34px;
+  color: var(--bg); background: var(--fg);
+  position: relative;
+}
+.mono-badge::after {
+  content: ""; position: absolute; right: -5px; bottom: -5px;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--btn-a); border: 3px solid var(--panel);
+}
+.who { min-width: 0; }
+.p1 { font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: .04em; }
+h1 {
+  font-family: var(--display); font-weight: 700; font-size: 34px; line-height: 1.05;
+  margin: 2px 0 4px; letter-spacing: .01em; text-wrap: balance; overflow-wrap: anywhere;
+}
+.tagline { margin: 0; color: var(--muted); font-size: 15px; }
+.status {
+  grid-column: 1 / -1;
+  display: flex; flex-wrap: wrap; gap: 8px 16px;
+  padding-top: 14px; border-top: 1px solid var(--line);
+  font-size: 13px; color: var(--muted);
+}
+.status b { color: var(--fg); font-weight: 700; }
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--btn-a); margin-right: 6px; vertical-align: 1px; }
+
+.menu-title {
+  font-family: var(--display); font-weight: 600; font-size: 13px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--muted);
+  margin: 0 0 -14px 4px;
+}
+.menu { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.item {
+  display: grid; grid-template-columns: 40px 1fr auto; gap: 14px; align-items: center;
+  padding: 14px 16px; border-radius: 12px;
+  background: var(--panel); border: 1px solid var(--line);
+  color: var(--fg); text-decoration: none;
+  transition: transform .12s ease, border-color .12s ease, background-color .12s ease;
+}
+.item:hover, .item:focus-visible { border-color: var(--c); transform: translateX(4px); }
+.item:focus-visible { outline: 2px solid var(--c); outline-offset: 2px; }
+.key {
+  width: 40px; height: 40px; border-radius: 50%;
+  display: grid; place-items: center;
+  font-family: var(--display); font-weight: 700; font-size: 18px;
+  color: var(--bg); background: var(--c);
+}
+.label { min-width: 0; }
+.label strong { display: block; font-family: var(--display); font-weight: 700; font-size: 19px; line-height: 1.15; }
+.label span { display: block; font-size: 13px; color: var(--muted); overflow-wrap: anywhere; }
+.go { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.a { --c: var(--btn-a); } .b { --c: var(--btn-b); } .x { --c: var(--btn-x); } .y { --c: var(--btn-y); }
+
+button.item { width: 100%; font: inherit; text-align: left; cursor: pointer; }
+
+.code {
+  font-family: var(--mono); font-size: 13px; color: var(--muted);
+  text-align: center; margin: 4px 0 0;
+}
+.code .k { color: var(--btn-x); } .code .f { color: var(--btn-y); }
+.toast { font-size: 13px; color: var(--btn-a); min-height: 1.5em; text-align: center; margin: -16px 0 0; }
+
+@media (prefers-reduced-motion: reduce) { .item { transition: none; } .item:hover { transform: none; } }
+@media (max-width: 380px) { h1 { font-size: 28px; } .card { padding: 18px; } }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <section class="card" aria-label="Perfil">
+    <div class="mono-badge" aria-hidden="true">n</div>
+    <div class="who">
+      <div class="p1">PLAYER 1 · CONECTADO</div>
+      <h1>nickeduuu</h1>
+      <p class="tagline">Os melhores (e piores) momentos das minhas partidas.</p>
+    </div>
+    <div class="status">
+      <span><span class="dot" aria-hidden="true"></span>Jogando agora: <b>Marvel Rivals</b></span>
+      <span>Clip novo <b>todo dia</b></span>
+    </div>
+  </section>
+
+  <h2 class="menu-title">Escolha onde assistir</h2>
+  <ul class="menu">
+    <li><a class="item b" href="https://www.youtube.com/@nickeduu" target="_blank" rel="noopener">
+      <span class="key" aria-hidden="true">B</span>
+      <span class="label"><strong>YouTube</strong><span>nickeduuu · Shorts e vídeos</span></span>
+      <span class="go" aria-hidden="true">→</span></a></li>
+    <li><a class="item x" href="https://www.tiktok.com/@nickeduuu" target="_blank" rel="noopener">
+      <span class="key" aria-hidden="true">X</span>
+      <span class="label"><strong>TikTok</strong><span>@nickeduuu</span></span>
+      <span class="go" aria-hidden="true">→</span></a></li>
+    <li><a class="item y" href="https://www.instagram.com/nick.eduuu/" target="_blank" rel="noopener">
+      <span class="key" aria-hidden="true">Y</span>
+      <span class="label"><strong>Instagram</strong><span>@nick.eduuu · Reels</span></span>
+      <span class="go" aria-hidden="true">→</span></a></li>
+    <li><button class="item a" id="copy-gt" type="button">
+      <span class="key" aria-hidden="true">A</span>
+      <span class="label"><strong>Jogar comigo no Xbox</strong><span>Gamertag: <span id="gt" style="display:inline;color:var(--fg)">nickeduu</span> · toque para copiar</span></span>
+      <span class="go" aria-hidden="true">⧉</span></button></li>
+  </ul>
+  <p class="toast" id="toast" role="status" aria-live="polite"></p>
+
+  <p class="code"><span class="k">while</span> (vivo) { <span class="f">jogar</span>(); <span class="f">codar</span>(); }</p>
+</main>
+
+<script>
+const btn = document.getElementById('copy-gt');
+const toast = document.getElementById('toast');
+btn.addEventListener('click', () => {
+  const done = () => { toast.textContent = 'Gamertag copiada: nickeduu'; };
+  const fallback = () => {
+    const r = document.createRange(); r.selectNodeContents(document.getElementById('gt'));
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+    toast.textContent = 'Gamertag selecionada: copie com Ctrl+C';
+  };
+  try { navigator.clipboard.writeText('nickeduu').then(done, fallback); } catch (e) { fallback(); }
+});
+</script>
+</body>
+</html>
